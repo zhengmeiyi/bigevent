@@ -23,11 +23,35 @@
             <form class="login_form">
                 <i class="iconfont icon-user"></i>
                 <i class="iconfont icon-key"></i>
-                <input type="text" class="input_txt" placeholder="邮箱/手机号">
-                <input type="password" class="input_pass" placeholder="密码">
-                <input type="submit" class="input_sub" value="登 录">
+                <input id="user_name" type="text" class="input_txt" placeholder="用户名">
+                <input id="user_password" type="password" class="input_pass" placeholder="密码">
+                <!-- submit改为了button,防止页面刷新 -->
+                <input id="user_login" type="button" class="input_sub" value="登 录">
             </form>
         </div>
-    </div> 
+    </div>
 </body>
+<script src="./js/jquery-1.12.4.min.js"></script>
+<script>
+    // 1.用户登录
+    $('#user_login').click(function () {
+        // 获取用户输入的用户名和密码
+        var user_name = $('#user_name').val().trim();
+        var password = $('#user_password').val();
+        
+        $.post('http://192.168.172.82:8000/admin/login',
+            {
+                "user_name": user_name,
+                "password": password
+            }).then(function (res) {
+                if(res.code===200){
+                    window.location.href="index.html";
+                }else{
+                    alert(res.msg)
+                }
+            });
+
+    });
+</script>
+
 </html>
