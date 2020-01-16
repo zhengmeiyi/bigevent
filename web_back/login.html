@@ -32,25 +32,24 @@
     </div>
 </body>
 <script src="./js/jquery-1.12.4.min.js"></script>
+<script src="./js/util/config.js"></script>
+<script src="js/util/user.js"></script>
+
 <script>
+
     // 1.用户登录
     $('#user_login').click(function () {
         // 获取用户输入的用户名和密码
         var user_name = $('#user_name').val().trim();
         var password = $('#user_password').val();
-        
-        $.post('http://192.168.172.82:8000/admin/login',
-            {
-                "user_name": user_name,
-                "password": password
-            }).then(function (res) {
-                if(res.code===200){
-                    window.location.href="index.html";
-                }else{
-                    alert(res.msg)
-                }
-            });
-
+        user.user_login(user_name, password)
+        .then(function (res) {
+            if (res.code === 200) {
+                window.location.href = "index.html";
+            } else {
+                alert(res.msg)
+            }
+        });;
     });
 </script>
 
