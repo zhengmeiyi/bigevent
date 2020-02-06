@@ -1,7 +1,7 @@
 // 与文章有关
 var artical = {
-    get: function () {
-        return $.get(APILIST.artical_get)
+    get: function (page) {
+        return $.get(APILIST.artical_get,{'page':page})
     },
     // add: function (name, slug) {
     //     return $.post(APILIST.category_add, {
