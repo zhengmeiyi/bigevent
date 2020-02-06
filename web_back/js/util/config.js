@@ -17,10 +17,10 @@ var APILIST = {
     category_add: BASEURL + '/admin/category_add',
     // 6.文章类别删除
     category_del: BASEURL + '/admin/category_delete',
-    // 7.文章类别编辑idet
+    // 7.文章类别编辑
     category_edit: BASEURL + '/admin/category_edit',
 
-
-
+    // 8文章获取
+    artical_get: BASEURL + '/admin/search',
     
 }
