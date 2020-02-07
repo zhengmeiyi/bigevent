@@ -3,9 +3,16 @@ var artical = {
         // 文章获取
         get: function (page, type, atatus) {
             return $.get(APILIST.artical_get, {
+                
                 'page': page,
                 'type': type,
                 'state': status
+            })
+        },
+        //文章获取
+        getById: function (id) {
+            return $.get(APILIST.artical_get, {
+                'id':id,
             })
         },
         // 文章删除
@@ -23,6 +30,7 @@ var artical = {
                 contentType: false
             })
     },
+    
 
     // edit: function (id,name,slug){
     //     return $.post(APILIST.category_edit, {
