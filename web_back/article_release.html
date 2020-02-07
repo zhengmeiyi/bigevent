@@ -23,28 +23,28 @@
             写文章
         </div>
         <div class="container-fluid common_con">
-            <form class="form-horizontal article_form">
+            <form id="myform" class="form-horizontal article_form">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="文章标题">
+                        <input name="title" type="email" class="form-control" id="inputEmail3" placeholder="文章标题">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
                     <div class="col-sm-10">
-                        <input type="file" id="exampleInputFile">
+                        <input name="cover" type="file" id="exampleInputFile">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
-                            <option>1</option>
+                        <select id="cate" name="type" class="form-control">
+                            <!-- <option>1</option>
                             <option>2</option>
                             <option>3</option>
                             <option>4</option>
-                            <option>5</option>
+                            <option>5</option> -->
                         </select>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="col-sm-4">
 
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="dateinput">
+                            <input name="date" type="text" class="form-control" placeholder="YYYY-MM-DD" id="dateinput">
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button"
                                     onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
@@ -72,8 +72,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">发布</button>
-                        <button type="submit" class="btn btn-default">存为草稿</button>
+                        <button id="btn_add" type="button" class="btn btn-success">发布</button>
+                        <button type="button" class="btn btn-default">存为草稿</button>
                     </div>
                 </div>
             </form>
@@ -81,5 +81,38 @@
     </div>
 
 </body>
+<script src="./js/template-web.js"></script>
+
+<script src="./js/util/config.js"></script>
+<script src="./js/util/artical.js"></script>
+<script src="./js/util/category.js"></script>
+<!-- -----------------------------文章类别显示模板 -->
+<script id='tmp_list' type="text/html">
+    {{each data item}}
+    <option value="{{item.id}}">{{item.name}}</option>
+    {{/each}}
+
+</script>
+
+<script>
+    // -----------------------发布文章
+    $('#btn_add').click(function () {
+        var fd = new FormData(document.getElementById('myform'));
+        fd.append('state', '已发布')
+        // 获取富文本编辑器的内容
+        fd.set('content', tinyMCE.activeEditor.getContent())
+        artical.add(fd).then(function (res) {
+            console.log(res);
+        })
+    })
+    // ---------------------获取文章类别
+    category.get().then(function (res) {
+        console.log(res);
+        var htmlStr = template('tmp_list', res);
+        console.log(htmlStr)
+        $('#cate').html(htmlStr);
+
+    })
+</script>
 
 </html>
