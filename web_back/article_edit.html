@@ -23,24 +23,24 @@
             文章编辑
         </div>
         <div class="container-fluid common_con">
-            <form class="form-horizontal article_form">
+            <form id="editForm" class="form-horizontal article_form">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="title" value="文章标题文字">
+                        <input type="text" class="form-control" name="title" id="title" value="文章标题文字">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
                     <div class="col-sm-10">
                         <img src="images/pic06.jpg" id="pic" class="article_cover">
-                        <input type="file" id="exampleInputFile">
+                        <input  name="cover" type="file" id="exampleInputFile">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
                     <div class="col-sm-4">
-                        <select id="selCategory" class="form-control">
+                        <select name="type" id="selCategory" class="form-control">
                             <!-- <option>类别一</option>
                             <option>类别二</option>
                             <option>类别三</option>
@@ -54,9 +54,9 @@
                     <div class="col-sm-4">
 
                         <div class="input-group">
-                            <input type="text" class="form-control" value="2019-05-17" id="dateinput">
+                            <input type="text" class="form-control" name="date" value="2019-05-17" id="dateinput">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"
+                                <button  class="btn btn-default" type="button"
                                     onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
                                         class="iconfont icon-icondate"></i></button>
                             </span>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">修改</button>
+                        <button id="edit" type="button" class="btn btn-success">修改</button>
                     </div>
                 </div>
             </form>
@@ -98,7 +98,7 @@
     var curId = window.location.search.substr(4)
     // console.log(curId)
     // 2.获取文章详情
-    
+
     function getAndShow(curId) {
         artical.getById(curId).then(function (res) {
             // 3.文章显示在页面上
@@ -134,6 +134,21 @@
 
         })
     }
+
+    // 3保存文章
+    $('#edit').click(function () {
+        var fd = new FormData(document.getElementById('editForm'));
+        fd.append('id',curId)
+        fd.set('content', tinyMCE.activeEditor.getContent())
+        artical.edit(fd).then(function (res) {
+            if (res.code == 200) {
+                alert('修改成功')
+
+            } else {
+                alert(res.msg)
+            }
+        })
+    })
 </script>
 
 </html>
