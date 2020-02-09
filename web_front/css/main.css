@@ -38,6 +38,9 @@ body{
     cursor: pointer;
     outline:none;
 }
+.cur{
+    background-color: #0075f3;
+}
 .fa-search{
     color:#fff;
     font-size: 20px;
