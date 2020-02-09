@@ -8,4 +8,7 @@ var artical = {
     search: function () {
         return $.get(APILIST.artical_search)
     },
+    rank:function () {
+        return $.get(APILIST.artical_rank)
+    },
  }
