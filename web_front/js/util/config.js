@@ -10,8 +10,9 @@ var APILIST = {
     category_get: BASEURL + '/category',
   
 
-    // 8文章获取
+    // 2文章获取
     artical_get: BASEURL + '/lastest',
-   
+    // 3焦点图
+    artical_search: BASEURL + '/search',
    
 }

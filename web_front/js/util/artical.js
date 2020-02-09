@@ -4,5 +4,8 @@ var artical = {
     get: function () {
         return $.get(APILIST.artical_get)
     },
- 
+    //焦点图
+    search: function () {
+        return $.get(APILIST.artical_search)
+    },
  }

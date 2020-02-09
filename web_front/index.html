@@ -55,8 +55,8 @@
 
     <div class="main_con clearfix">
         <div class="left_con">
-            <ul class="focus_list">
-                <li class="first">
+            <ul id="articlefocos" class="focus_list">
+                <!-- <li class="first">
                     <a href="#"><img src="images/pic01.jpg" alt=""></a>
                     <p>图片说明</p>
                 </li>
@@ -75,7 +75,7 @@
                 <li>
                     <a href="#"><img src="images/pic06.jpg" alt=""></a>
                     <p>图片说明</p>
-                </li>
+                </li> -->
             </ul>
 
             <div class="common_title">
@@ -206,6 +206,23 @@
     </div>
     {{/each}}
 </script>
+
+<!-- -------------焦点图模板 -->
+<script id="temp_focos" type="text/html">
+    {{each data item idx}}
+    {{if idx==0}}
+    <li class="first">
+        <a href="#"><img src="{{item.cover}}" alt=""></a>
+        <p>{{item.title}}</p>
+    </li>
+    {{else}}
+    <li >
+        <a href="#"><img src="{{item.cover}}" alt=""></a>
+        <p>{{item.title}}</p>
+    </li>
+    {{/if}}
+    {{/each}}
+</script>
 <script>
     // --------------------1获取导航分类
     category.get().then(function (res) {
@@ -224,6 +241,17 @@
         if (res.code === 200) {
             var htmlStr = template('temp_article', res);
             $('#articlelist').html(htmlStr)
+        } else {
+            alert(res.msg)
+        }
+
+    })
+
+    // ----------------------显示焦点图
+    artical.get().then(function (res) {
+        if (res.code === 200) {
+            var htmlStr = template('temp_focos', res);
+            $('#articlefocos').html(htmlStr)
         } else {
             alert(res.msg)
         }
