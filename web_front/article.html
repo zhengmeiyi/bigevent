@@ -28,7 +28,7 @@
         <div class="menu">
             <div class="menu_collapse fl">
                 <a href="javascript:;" class="level_one"><i class="fa fa-list-ul"></i>全部分类</a>
-                <ul  id="categoryleft"  class="level_two">
+                <ul id="categoryleft" class="level_two">
                     <li class="up"></li>
                     <!-- <li><a href="#">最 新</a></li>
                     <li><a href="#">科 技</a></li>
@@ -84,14 +84,14 @@
             <form action="" class="comment_form">
                 <div class="form_group">
                     <label>用户名：</label>
-                    <input type="text" placeholder="请输入用户名" class="comment_name">
+                    <input id="user" type="text" placeholder="请输入用户名" class="comment_name">
                 </div>
                 <div class="form_group">
                     <label>评论内容：</label>
-                    <textarea placeholder="请发表您的评论" class="comment_input"></textarea>
+                    <textarea id="comment_content" placeholder="请发表您的评论" class="comment_input"></textarea>
                 </div>
                 <div class="form_group">
-                    <input type="submit" name="" value="评 论" class="comment_sub"></div>
+                    <input id="btn" type="button" name="" value="评 论" class="comment_sub"></div>
             </form>
 
             <div class="comment_count">
@@ -213,6 +213,8 @@
 <script src="./js/util/config.js"></script>
 <script src="./js/util/category.js"></script>
 <script src="./js/util/artical.js"></script>
+<script src="./js/util/comment.js"></script>
+
 
 
 <!-- -------------类别模板 并当前分类高亮 -->
@@ -229,8 +231,8 @@
 
 <script>
     var id = window.location.search.substr(4)
-     // --------------------1获取导航分类
-     category.get().then(function (res) {
+    // --------------------1获取导航分类
+    category.get().then(function (res) {
         if (res.code === 200) {
             res.curid = id;
             var htmlStr = template('temp_cate', res);
@@ -238,12 +240,12 @@
             $('#categoryleft').append(htmlStr)
 
             // console.log(res.data);
-                // ----------------------------列表页标题显示
-                res.data.forEach(function (item) {
-                    if (item.id == id) {
-                        $('#cateName').html(item.name)
-                    }
-                });
+            // ----------------------------列表页标题显示
+            res.data.forEach(function (item) {
+                if (item.id == id) {
+                    $('#cateName').html(item.name)
+                }
+            });
 
         } else {
             alert(res.msg)
@@ -253,21 +255,31 @@
     // ------------------------------文章详情页显示
     getAndShow();
     function getAndShow() {
-        
+
         artical.getdetail(id).then(function (res) {
             if (res.code == 200) {
-                console.log(res);
+                // console.log(res);
 
                 var rs = res.data;
                 $('#title').html(rs.title);
                 $('#comment').html(rs.comment);
                 $('#date').html(rs.date);
-                // ------------------下一篇上一篇
-                $('#next').attr('href','./article.html?id='+rs.next.id);
-                $('#next').text(rs.next.title)
-                $('#prev').attr('href','./article.html?id='+rs.prev.id);
-                $('#prev').text(rs.prev.title)
-               
+                // ------------------下一篇上一篇优化
+                if ($('#next')) {
+                    $('#next').attr('href', './article.html?id=' + rs.next.id);
+                    $('#next').text(rs.next.title)
+                } else {
+                    $('#next').text('无')
+                }
+                if ($('#prev')) {
+                    $('#prev').attr('href', './article.html?id=' + rs.prev.id);
+                    $('#prev').text(rs.prev.title)
+
+                } else {
+                    $('#prev').text('无')
+                }
+
+
                 $('#read').html(rs.read);
                 $('#type_name').html(rs.type_name);
                 $('#author').html(rs.author);
@@ -278,8 +290,24 @@
 
         })
     }
+    // ------------------------------------------------增加评论
+    $('#btn').click(function () {
+        var user = $('#user').val().trim();
+        var content = $('#comment_content').val().trim();
+        console.log(user, content);
+        if (user == "" || content == "") {
+            alert('不能为空')
+            return;
+        }
+        comment.add(user, content, id).then(function (res) {
+            // 1清空
+            $('#user').val("");
+            $('#comment_content').val("");
+            // 2重新加载
+        })
 
-  
+    })
+
 </script>
 
 
