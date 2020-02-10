@@ -98,7 +98,7 @@
                 4条评论
             </div>
 
-            <div class="comment_list_con">
+            <div id="commnet_list" class="comment_list_con">
                 <div class="comment_detail_list">
                     <div class="person_pic fl">乔</div>
                     <div class="name_time fl"><b>虚竹</b><span>4小时前</span></div>
@@ -144,7 +144,7 @@
             </div>
             <div class="common_wrap">
                 <h3><i class="fa fa-commenting-o"></i> 最新评论</h3>
-                <ul class="content_list comment_list">
+                <ul id="comment_list" class="content_list comment_list">
                     <li>
                         <span>山</span>
                         <b><em>山治</em> 9个月前(08-14)说:</b>
@@ -228,6 +228,20 @@
     {{/if}}
     {{/each}}
 </script>
+<!-- -----------------------评论模板 -->
+<script id="temp_comment" type="text/html">
+
+{{each data item}}
+<div class="comment_detail_list">
+    <div class="person_pic fl">{{item.name.substr(0,1)}}</div>
+    <div class="name_time fl"><b>{{item.name}}</b><span>{{item.dt}}说:</span></div>
+    <div class="comment_text fl">
+        {{item.content}}
+    </div>
+</div>
+{{/each}}
+
+</script>
 
 <script>
     var id = window.location.search.substr(4)
@@ -304,10 +318,23 @@
             $('#user').val("");
             $('#comment_content').val("");
             // 2重新加载
+            getComment()
         })
 
     })
 
+
+    // -----------------------评论显示
+    getComment()
+    function getComment(){
+        comment.get(id).then(function (res) {
+        
+        var htmlStr = template('temp_comment', res);
+        $('#commnet_list').html(htmlStr)
+    })
+
+    }
+    
 </script>
 
 

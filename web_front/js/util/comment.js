@@ -8,5 +8,10 @@ var comment = {
             'article_id':article_id
         })
     },
+    get:function (article_id) {
+        return $.get(APILIST.comment_get,{
+            'article_id':article_id
+        })
+    },
   
 }
