@@ -16,5 +16,8 @@ var APILIST = {
     artical_search: BASEURL + '/search',
     // 4.热门排行榜
     artical_rank: BASEURL + '/rank',
+    // 5.文章详情
+    artical_detail: BASEURL + '/article',
+
    
 }

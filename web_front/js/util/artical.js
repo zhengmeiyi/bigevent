@@ -8,18 +8,23 @@ var artical = {
     search: function () {
         return $.get(APILIST.artical_search)
     },
-    rank:function () {
+    rank: function () {
         return $.get(APILIST.artical_rank)
     },
-    rankList:function (type) {
-        return $.get(APILIST.artical_rank,{
-            type:type,
+    rankList: function (type) {
+        return $.get(APILIST.artical_rank, {
+            type: type,
         })
     },
-    getID:function (type,page) {
-        return $.get(APILIST.artical_search,{
-            type:type,
-            page:page
+    getID: function (type, page) {
+        return $.get(APILIST.artical_search, {
+            type: type,
+            page: page
         })
     },
- }
+    getdetail: function (id) {
+        return $.get(APILIST.artical_detail, {
+            id: id
+        })
+    }
+}
