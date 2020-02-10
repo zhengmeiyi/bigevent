@@ -244,12 +244,12 @@
 </script>
 
 <script>
-    var id = window.location.search.substr(4)
+    let varid = window.location.search.substr(4)
     // --------------------1获取导航分类
     category.get().then(function (res) {
         if (res.code === 200) {
             res.curid = id;
-            var htmlStr = template('temp_cate', res);
+            let htmlStr = template('temp_cate', res);
             $('#category').html(htmlStr)
             $('#categoryleft').append(htmlStr)
 
@@ -274,7 +274,7 @@
             if (res.code == 200) {
                 // console.log(res);
 
-                var rs = res.data;
+                let rs = res.data;
                 $('#title').html(rs.title);
                 $('#comment').html(rs.comment);
                 $('#date').html(rs.date);
@@ -306,8 +306,8 @@
     }
     // ------------------------------------------------增加评论
     $('#btn').click(function () {
-        var user = $('#user').val().trim();
-        var content = $('#comment_content').val().trim();
+        let user = $('#user').val().trim();
+        let content = $('#comment_content').val().trim();
         console.log(user, content);
         if (user == "" || content == "") {
             alert('不能为空')
@@ -329,7 +329,7 @@
     function getComment(){
         comment.get(id).then(function (res) {
         
-        var htmlStr = template('temp_comment', res);
+        let htmlStr = template('temp_comment', res);
         $('#commnet_list').html(htmlStr)
     })
 

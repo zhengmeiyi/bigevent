@@ -216,15 +216,15 @@
 
 <script>
     // ----------------获取当前页类别id
-    var id = window.location.search.substr(4);
+    let id = window.location.search.substr(4);
     console.log(id);
-    var curpage = 1;
+    let curpage = 1;
 
     // --------------------1获取导航分类
     category.get().then(function (res) {
         if (res.code === 200) {
             res.curid = id;
-            var htmlStr = template('temp_cate', res);
+            let htmlStr = template('temp_cate', res);
             $('#category').html(htmlStr)
             $('#categoryleft').append(htmlStr)
 
@@ -247,7 +247,7 @@
         artical.getID(id, curpage).then(function (res) {
             if (res.code === 200) {
 
-                var htmlStr = template('temp_article', res);
+                let htmlStr = template('temp_article', res);
                 $('#articlelist').html(htmlStr);
                 
 
@@ -283,7 +283,7 @@
     artical.rankList(id).then(function (res) {
         if (res.code === 200) {
 
-            var htmlStr = template('temp_rank', res);
+            let htmlStr = template('temp_rank', res);
             $('#articlerank').html(htmlStr)
         } else {
             alert(res.msg)

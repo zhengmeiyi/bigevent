@@ -246,7 +246,7 @@
     // --------------------1获取导航分类
     category.get().then(function (res) {
         if (res.code === 200) {
-            var htmlStr = template('temp_cate', res);
+            let htmlStr = template('temp_cate', res);
             $('#category').html(htmlStr)
             $('#categoryleft').append(htmlStr)
 
@@ -258,7 +258,7 @@
     // ------------------------获取最新资讯文章列表
     artical.get().then(function (res) {
         if (res.code === 200) {
-            var htmlStr = template('temp_article', res);
+            let htmlStr = template('temp_article', res);
             $('#articlelist').html(htmlStr)
         } else {
             alert(res.msg)
@@ -269,7 +269,7 @@
     // ----------------------显示焦点图
     artical.get().then(function (res) {
         if (res.code === 200) {
-            var htmlStr = template('temp_focos', res);
+            let htmlStr = template('temp_focos', res);
             $('#articlefocos').html(htmlStr)
         } else {
             alert(res.msg)
@@ -280,7 +280,7 @@
     artical.rank().then(function (res) {
         if (res.code === 200) {
 
-            var htmlStr = template('temp_rank', res);
+            let htmlStr = template('temp_rank', res);
             $('#articlerank').html(htmlStr)
         } else {
             alert(res.msg)
