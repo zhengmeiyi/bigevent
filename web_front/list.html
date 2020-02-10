@@ -61,7 +61,7 @@
         <div class="left_con setfr">
 
             <div class="list_title">
-                <h3 id="type">科 技</h3>
+                <h3 id="cateName"> </h3>
             </div>
             <div id="articlelist">
                 <!-- <div class="common_news_list">
@@ -132,7 +132,7 @@
             </div>
             <div class="common_wrap">
                 <h3><i class="fa fa-bullseye"></i> 焦点关注</h3>
-                <ul  class="content_list guanzhu_list">
+                <ul class="content_list guanzhu_list">
                     <li><a href="#">神奇的水滴摄影，泡泡中的世界泡泡中的世界</a></li>
                     <li><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
                     <li><a href="#">神奇的水滴摄影，泡泡中的世界</a></li>
@@ -224,28 +224,36 @@
     category.get().then(function (res) {
         if (res.code === 200) {
             res.curid = id;
-            // console.log(res);
-
-
             var htmlStr = template('temp_cate', res);
             $('#category').html(htmlStr)
             $('#categoryleft').append(htmlStr)
+
+            // console.log(res.data);
+                // ----------------------------列表页标题显示
+                res.data.forEach(function (item) {
+                    if (item.id == id) {
+                        $('#cateName').html(item.name)
+                    }
+                });
 
         } else {
             alert(res.msg)
         }
 
     })
-
+    getAndShow();
     // -------------------------获取当前类别文章列表
     function getAndShow() {
         artical.getID(id, curpage).then(function (res) {
             if (res.code === 200) {
-                console.log(res);
-                curpage = res.pages;
+
                 var htmlStr = template('temp_article', res);
                 $('#articlelist').html(htmlStr);
-                if(res.pages<=1){
+                
+
+
+
+                if (res.pages <= 1) {
                     return;
                 }
                 // -------------分页插件
@@ -270,7 +278,7 @@
 
         })
     }
-    getAndShow();
+
     // --------------------------热门排行榜
     artical.rankList(id).then(function (res) {
         if (res.code === 200) {
