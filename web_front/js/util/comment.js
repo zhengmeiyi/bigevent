@@ -1,17 +1,8 @@
-// 与文章有关
+// 与评论有关
 var comment = {
-    // 最新资讯文章获取
-    add: function (name,content,article_id) {
-        return $.post(APILIST.comment_add,{
-            'name':name,
-            'content':content,
-            'article_id':article_id
-        })
-    },
-    get:function (article_id) {
-        return $.get(APILIST.comment_get,{
-            'article_id':article_id
-        })
-    },
+    // 增加评论
+    add: (name,content,article_id)=>$.post(APILIST.comment_add,{name,content,article_id}),
+    //获取评论并显示
+    get:article_id=>  $.get(APILIST.comment_get,{article_id }),
   
 }

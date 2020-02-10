@@ -1,6 +1,5 @@
 // 获取文章分类
 var category = {
-    get: function () {
-        return $.get(APILIST.category_get)
-    }
+    get: ()=> $.get(APILIST.category_get),
+
 }

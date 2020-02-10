@@ -1,9 +1,9 @@
 // 配置文件：基地址
-var BASEURL = 'http://192.168.1.3:8000';
+const BASEURL = 'http://192.168.1.3:8000';
 // var BASEURL = 'localhost:8000';
 
 
-var APILIST = {
+const APILIST = {
 
     // 1.文章类别搜索
     category_get: BASEURL + '/category',

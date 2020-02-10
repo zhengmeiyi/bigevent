@@ -1,10 +1,10 @@
 
 // 配置文件：基地址
-var BASEURL = 'http://192.168.1.3:8000';
+const BASEURL = 'http://192.168.1.3:8000';
 // var BASEURL = 'localhost:8000';
 
 
-var APILIST = {
+const APILIST = {
     // 1.用户登录地址
     user_login: BASEURL + '/admin/login',
     // 2.用户退出地址

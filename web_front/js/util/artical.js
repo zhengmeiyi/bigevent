@@ -1,30 +1,22 @@
 // 与文章有关
 var artical = {
     // 最新资讯文章获取
-    get: function () {
-        return $.get(APILIST.artical_get)
-    },
+    get: () => $.get(APILIST.artical_get),
     //焦点图
-    search: function () {
-        return $.get(APILIST.artical_search)
-    },
-    rank: function () {
-        return $.get(APILIST.artical_rank)
-    },
-    rankList: function (type) {
-        return $.get(APILIST.artical_rank, {
-            type: type,
-        })
-    },
-    getID: function (type, page) {
-        return $.get(APILIST.artical_search, {
-            type: type,
-            page: page
-        })
-    },
-    getdetail: function (id) {
-        return $.get(APILIST.artical_detail, {
-            id: id
-        })
-    }
+    search: () => $.get(APILIST.artical_search),
+    // 热门排行榜
+    rank: () => $.get(APILIST.artical_rank),
+    // 类别热门排行榜
+    rankList: type => $.get(APILIST.artical_rank, {
+        type
+    }),
+    // 类别文章获取
+    getID: (type, page) => $.get(APILIST.artical_search, {
+        type,
+        page
+    }),
+    getdetail: id => $.get(APILIST.artical_detail, {
+        id
+    })
+
 }
