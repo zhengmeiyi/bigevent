@@ -11,9 +11,10 @@ var artical = {
     rank:function () {
         return $.get(APILIST.artical_rank)
     },
-    getID:function (type) {
+    getID:function (type,page) {
         return $.get(APILIST.artical_search,{
             type:type,
+            page:page
         })
     },
  }
