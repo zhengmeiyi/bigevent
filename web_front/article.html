@@ -244,10 +244,11 @@
 </script>
 
 <script>
-    let varid = window.location.search.substr(4)
+    let id = window.location.search.substr(4)
     // --------------------1获取导航分类
     category.get().then(function (res) {
-        if (res.code === 200) {
+        let {data,code,msg}=res;
+        if (code === 200) {
             res.curid = id;
             let htmlStr = template('temp_cate', res);
             $('#category').html(htmlStr)
@@ -255,14 +256,14 @@
 
             // console.log(res.data);
             // ----------------------------列表页标题显示
-            res.data.forEach(function (item) {
+            data.forEach(function (item) {
                 if (item.id == id) {
                     $('#cateName').html(item.name)
                 }
             });
 
         } else {
-            alert(res.msg)
+            alert(msg)
         }
 
     })
@@ -271,7 +272,8 @@
     function getAndShow() {
 
         artical.getdetail(id).then(function (res) {
-            if (res.code == 200) {
+            let {code,msg}=res;
+            if (code == 200) {
                 // console.log(res);
 
                 let rs = res.data;
@@ -299,7 +301,7 @@
                 $('#author').html(rs.author);
                 $('#content').html(rs.content);
             } else {
-                alert(res.msg)
+                alert(msg)
             }
 
         })
@@ -308,7 +310,7 @@
     $('#btn').click(function () {
         let user = $('#user').val().trim();
         let content = $('#comment_content').val().trim();
-        console.log(user, content);
+        // console.log(user, content);
         if (user == "" || content == "") {
             alert('不能为空')
             return;

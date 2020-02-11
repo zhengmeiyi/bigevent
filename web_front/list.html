@@ -222,7 +222,8 @@
 
     // --------------------1获取导航分类
     category.get().then(function (res) {
-        if (res.code === 200) {
+        let {code,msg}=res;
+        if (code === 200) {
             res.curid = id;
             let htmlStr = template('temp_cate', res);
             $('#category').html(htmlStr)
@@ -237,7 +238,7 @@
                 });
 
         } else {
-            alert(res.msg)
+            alert(msg)
         }
 
     })
@@ -245,7 +246,8 @@
     // -------------------------获取当前类别文章列表
     function getAndShow() {
         artical.getID(id, curpage).then(function (res) {
-            if (res.code === 200) {
+            let {code,msg}=res;
+            if (code === 200) {
 
                 let htmlStr = template('temp_article', res);
                 $('#articlelist').html(htmlStr);
@@ -273,7 +275,7 @@
 
 
             } else {
-                alert(res.msg)
+                alert(msg)
             }
 
         })
@@ -281,12 +283,13 @@
 
     // --------------------------热门排行榜
     artical.rankList(id).then(function (res) {
-        if (res.code === 200) {
+        let {code,msg}=res;
+        if (code === 200) {
 
             let htmlStr = template('temp_rank', res);
             $('#articlerank').html(htmlStr)
         } else {
-            alert(res.msg)
+            alert(msg)
         }
 
     })

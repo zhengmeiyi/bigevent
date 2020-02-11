@@ -245,45 +245,49 @@
 
     // --------------------1获取导航分类
     category.get().then(function (res) {
-        if (res.code === 200) {
+        let {code,msg}=res;
+        if (code === 200) {
             let htmlStr = template('temp_cate', res);
             $('#category').html(htmlStr)
             $('#categoryleft').append(htmlStr)
 
         } else {
-            alert(res.msg)
+            alert(msg)
         }
 
     })
     // ------------------------获取最新资讯文章列表
     artical.get().then(function (res) {
-        if (res.code === 200) {
+        let {code,msg}=res;
+        if (code === 200) {
             let htmlStr = template('temp_article', res);
             $('#articlelist').html(htmlStr)
         } else {
-            alert(res.msg)
+            alert(msg)
         }
 
     })
 
     // ----------------------显示焦点图
     artical.get().then(function (res) {
-        if (res.code === 200) {
+        let {code,msg}=res;
+        if (code === 200) {
             let htmlStr = template('temp_focos', res);
             $('#articlefocos').html(htmlStr)
         } else {
-            alert(res.msg)
+            alert(msg)
         }
 
     })
     // --------------------------热门排行
     artical.rank().then(function (res) {
-        if (res.code === 200) {
+        let {code,msg}=res;
+        if (code === 200) {
 
             let htmlStr = template('temp_rank', res);
             $('#articlerank').html(htmlStr)
         } else {
-            alert(res.msg)
+            alert(msg)
         }
 
     })
