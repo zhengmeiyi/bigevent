@@ -119,21 +119,23 @@
         $('#user_logout').click(function () {
             user.user_logout()
                 .then(function (res) {
-                    if (res.code === 200) {
+                    let {code,msg}=res;
+                    if (code === 200) {
                         window.location.href = "login.html"
                     } else {
-                        alert(res.msg)
+                        alert(msg)
                     }
 
                 });
         })
         // 2.获取用户信息
         user.user_getInfo().then(function (res) {
-            if (res.code === 200) {
-                $('#user_Name').text(res.data.nickname);
-                $('.userImg').attr('src', res.data.user_pic);
+            let {data,code,msg}=res;
+            if (code=== 200) {
+                $('#user_Name').text(data.nickname);
+                $('.userImg').attr('src', data.user_pic);
             } else {
-                alert(res.msg)
+                alert(msg)
             }
 
         });

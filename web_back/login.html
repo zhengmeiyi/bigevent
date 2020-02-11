@@ -44,10 +44,11 @@
         var password = $('#user_password').val();
         user.user_login(user_name, password)
         .then(function (res) {
-            if (res.code === 200) {
+            let {code,msg}=res;
+            if (code === 200) {
                 window.location.href = "index.html";
             } else {
-                alert(res.msg)
+                alert(msg)
             }
         });;
     });

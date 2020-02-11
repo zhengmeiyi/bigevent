@@ -184,11 +184,12 @@
         // 3.文章类别删除
         $('#category_table').on('click', '.del', function () {
             category.del(($(this).attr("data-id"))).then(function (res) {
-                if (res.code === 200) {
+                let {code,msg}=res;
+                if (code === 200) {
                     getandshow()
                 }
                 else {
-                    alert(res.msg)
+                    alert(msg)
                 }
 
             })
@@ -212,12 +213,13 @@
                 // console.log(id, new_name, new_slug)
                 category.edit(id, new_name, new_slug)
                 .then(function (res) {
-                    if(res.code===200){
+                    let {code,msg}=res;
+                    if(code===200){
                         $('#editModal').modal('hide');
                         getandshow()
                     }
                     else{
-                        alert(res.msg)
+                        alert(msg)
                     }
                 })
             })

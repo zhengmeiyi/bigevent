@@ -103,19 +103,20 @@
         artical.getById(curId).then(function (res) {
             // 3.文章显示在页面上
             // console.log(res)
-            if (res.code === 200) {
-                $('#title').val(res.data.title);
-                $('#pic').attr('src', res.data.cover);
-                $('#dateinput').val(res.data.date);
-                $('#selCategory').val(res.data.type)
+            let {code,msg,data}=res;
+            if (code === 200) {
+                $('#title').val(data.title);
+                $('#pic').attr('src', data.cover);
+                $('#dateinput').val(data.date);
+                $('#selCategory').val(data.type)
                 // 富文本编辑器内容
                 setTimeout(function () {
-                    tinymce.activeEditor.setContent(res.data.content)
+                    tinymce.activeEditor.setContent(data.content)
 
                 }, 1000);
 
             } else {
-                alert(res.msg)
+                alert(msg)
             }
         })
     }
@@ -123,12 +124,13 @@
     // 获取文章类型
     function getAndShowCategory() {
         category.get().then(function (res) {
-            if (res.code == 200) {
+            let {code,msg}=res;
+            if (code == 200) {
                 var htmlStr = template('tmp_category', res)
                 $('#selCategory').html(htmlStr)
                 getAndShow(curId);
             } else {
-                alert(res.msg)
+                alert(msg)
             }
 
 
@@ -141,11 +143,12 @@
         fd.append('id',curId)
         fd.set('content', tinyMCE.activeEditor.getContent())
         artical.edit(fd).then(function (res) {
-            if (res.code == 200) {
+            let {code,msg}=res
+            if (code == 200) {
                 alert('修改成功')
 
             } else {
-                alert(res.msg)
+                alert(msg)
             }
         })
     })
